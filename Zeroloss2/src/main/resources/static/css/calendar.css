@@ -1,7 +1,8 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f5f5f5;
+    background-image: url("/images/image3.png");
+    background-size: cover;       /* 画面いっぱいに広げる */
+    background-position: center;  /* 中央配置 */
+    background-repeat: no-repeat; /* 繰り返さない */
 }
 
 .calendar-container {

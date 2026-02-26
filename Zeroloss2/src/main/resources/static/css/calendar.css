@@ -1,37 +1,72 @@
+/* ===== 背景 ===== */
 body {
-    background-image: url("/images/image3.png");
-    background-size: cover;       /* 画面いっぱいに広げる */
-    background-position: center;  /* 中央配置 */
-    background-repeat: no-repeat; /* 繰り返さない */
-}
-
-.calendar-container {
-    width: 600px;
-    margin: 30px auto;
-    background: white;
+    margin: 0;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-image: url("/images/image3.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: sans-serif;
 }
 
+/* ===== カレンダー全体 ===== */
+.calendar-container {
+    max-width: 700px;     /* 固定600→可変に変更 */
+    width: 95%;
+    margin: 30px auto;
+    background: rgba(255, 255, 255, 0.95); /* 少し透過 */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* ===== グリッド ===== */
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
+    gap: 8px;
 }
 
+/* ===== 日付ボタン基本 ===== */
 .day {
-    padding: 15px;
+    padding: 15px 0;
     background-color: #e0e0e0;
-    border-radius: 5px;
+    border-radius: 8px;
+    text-align: center;
     cursor: pointer;
+    transition: 0.2s;
 }
 
+/* hover */
 .day:hover {
     background-color: #90caf9;
+    transform: translateY(-2px);
 }
 
+/* ===== 今日 ===== */
+.day--today {
+    background-color: #1976d2;
+    color: white;
+    font-weight: bold;
+}
+
+/* ===== 開封済み ===== */
+.day--opened {
+    background-color: #a5d6a7;
+}
+
+/* ===== 未来日（押せない） ===== */
+.day:disabled,
+.day--disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* ===== ステージ画像 ===== */
 .stage-image {
-    margin-top: 20px;
-    width: 200px;
+    display: block;
+    margin: 30px auto 0 auto;
+    max-width: 100%;   /* ← 200px固定をやめる */
+    height: auto;
 }

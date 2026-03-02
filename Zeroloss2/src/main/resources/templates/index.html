@@ -2,29 +2,16 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>アドベントカレンダー</title>
+    <title>カレンダー</title>
 </head>
 <body>
 
-<h1>アドベントカレンダー</h1>
+<h2>カレンダー</h2>
 
-<div id="buttons"></div>
+<div id="calendar"></div>
 
 <p id="message"></p>
 
-<script>
-    // 31個のボタンを作る
-    for (let i = 1; i <= 31; i++) {
-        document.getElementById("buttons").innerHTML +=
-            `<button onclick="hyoji(${i})">${i}</button>`;
-    }
-
-    // 表示する関数
-    function hyoji(day) {
-        document.getElementById("message").innerText =
-            day + "日目のメッセージです！";
-    }
-</script>
-
+<script src="message.js"></script>
 </body>
 </html>

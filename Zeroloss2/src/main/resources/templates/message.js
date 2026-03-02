@@ -6,6 +6,22 @@ function getRandomElement(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
-const message = getRandomElement(phrases1) + "、" + getRandomElement(phrases2) + " " + getRandomElement(phrases3);
+function createMessage() {
+    return getRandomElement(phrases1) + "、" +
+           getRandomElement(phrases2) + " " +
+           getRandomElement(phrases3);
+}
 
-console.log(message);
+const calendarDiv = document.getElementById("calendar");
+
+for (let i = 1; i <= 31; i++) {
+    const button = document.createElement("button");
+    button.textContent = i + "日";
+
+    button.addEventListener("click", function () {
+        const message = createMessage();
+        document.getElementById("message").textContent = message;
+    });
+
+    calendarDiv.appendChild(button);
+}

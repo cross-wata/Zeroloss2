@@ -1,91 +1,81 @@
-/* ===== 背景 ===== */
+/* ===== 全体 ===== */
 body {
     margin: 0;
-    padding: 20px;
-    background-image: url("/images/image3.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     font-family: sans-serif;
+    background-color: #f5f5f5;
 }
 
-/* ===== カレンダー全体 ===== */
+/* ===== 背景ラッパー ===== */
+.bg-wrapper {
+    position: relative;      /* ← 超重要 */
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* 背景画像 */
+.bg-image {
+    width: 100%;
+    display: block;
+}
+
+/* ===== カレンダー ===== */
 .calendar-container {
-    max-width: 700px;
-    width: 95%;
-    margin: 30px auto;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    position: absolute;
+    top: 12%;
+    left: 6%;
+    width: 40%;
 }
 
-/* ===== グリッド ===== */
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
+    gap: 6px;
 }
 
-/* ===== 日付ボタン基本 ===== */
 .day {
-    padding: 15px 0;
-    background-color: #e0e0e0;
+    padding: 10px 0;
+    border: none;
     border-radius: 8px;
-    text-align: center;
+    background: rgba(255,255,255,0.9);
     cursor: pointer;
     transition: 0.2s;
-    border: none;
-    font-size: 16px;
 }
 
-/* hover（disabled除外） */
-.day:hover:not(:disabled) {
-    background-color: #90caf9;
+.day:hover {
+    background: #ffe082;
     transform: translateY(-2px);
 }
 
-/* 今日 */
-.day--today {
-    background-color: #1976d2;
-    color: white;
-    font-weight: bold;
-}
-
-/* 開封済み */
-.day--opened {
-    background-color: #a5d6a7;
-}
-
-/* 未来日 */
-.day:disabled,
-.day--disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-/* ===== 画像枠（追加） ===== */
-.stage-box {
-    max-width: 800px;
-    margin: 30px auto;
-}
-
 /* ===== ステージ画像 ===== */
-.stage-image {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
+.stage-box {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+}
 
+.stage-image {
+    width: 100%;
     animation: rpgFloat 0.6s steps(2) infinite;
 }
 
 @keyframes rpgFloat {
-    0% {
-        transform: translateY(0px);
-    }
-    100% {
-        transform: translateY(-6px);
-    }
+    0%   { transform: translateY(0px); }
+    100% { transform: translateY(-6px); }
+}
+
+/* ===== メッセージ ===== */
+.message-box {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 55%;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    line-height: 1.8;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }

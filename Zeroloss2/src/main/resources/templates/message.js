@@ -1,6 +1,6 @@
-const phrases1 = ["おはよう", "こんにちは", "こんばんは"];
-const phrases2 = ["良い", "悪い", "不思議な"];
-const phrases3 = ["一日でした。", "日でした。", "夢でした。"];
+const phrases1 = ["ククク…", "愚かな人間よ", "闇に選ばれし者よ", "哀れな勇者よ"];
+const phrases2 = ["絶望の", "混沌の", "呪われた", "終焉の"];
+const phrases3 = ["一日が始まるのだ。", "運命からは逃れられぬ。", "影が忍び寄る。", "時が来た。"];
 
 function getRandomElement(arr) {
     return arr[Math.floor(Math.random() * arr.length)];

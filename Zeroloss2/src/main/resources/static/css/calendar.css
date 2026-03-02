@@ -11,10 +11,10 @@ body {
 
 /* ===== カレンダー全体 ===== */
 .calendar-container {
-    max-width: 700px;     /* 固定600→可変に変更 */
+    max-width: 700px;
     width: 95%;
     margin: 30px auto;
-    background: rgba(255, 255, 255, 0.95); /* 少し透過 */
+    background: rgba(255, 255, 255, 0.95);
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
@@ -35,27 +35,29 @@ body {
     text-align: center;
     cursor: pointer;
     transition: 0.2s;
+    border: none;
+    font-size: 16px;
 }
 
-/* hover */
-.day:hover {
+/* hover（disabled除外） */
+.day:hover:not(:disabled) {
     background-color: #90caf9;
     transform: translateY(-2px);
 }
 
-/* ===== 今日 ===== */
+/* 今日 */
 .day--today {
     background-color: #1976d2;
     color: white;
     font-weight: bold;
 }
 
-/* ===== 開封済み ===== */
+/* 開封済み */
 .day--opened {
     background-color: #a5d6a7;
 }
 
-/* ===== 未来日（押せない） ===== */
+/* 未来日 */
 .day:disabled,
 .day--disabled {
     background-color: #cccccc;
@@ -63,10 +65,27 @@ body {
     opacity: 0.6;
 }
 
+/* ===== 画像枠（追加） ===== */
+.stage-box {
+    max-width: 800px;
+    margin: 30px auto;
+}
+
 /* ===== ステージ画像 ===== */
 .stage-image {
     display: block;
-    margin: 30px auto 0 auto;
-    max-width: 100%;   /* ← 200px固定をやめる */
+    width: 100%;
     height: auto;
+    object-fit: contain;
+
+    animation: rpgFloat 0.6s steps(2) infinite;
+}
+
+@keyframes rpgFloat {
+    0% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-6px);
+    }
 }

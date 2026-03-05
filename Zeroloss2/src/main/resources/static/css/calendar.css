@@ -7,7 +7,7 @@ body {
 
 /* ===== 背景ラッパー ===== */
 .bg-wrapper {
-    position: relative;      /* ← 超重要 */
+    position: relative;
     max-width: 1000px;
     margin: 0 auto;
 }

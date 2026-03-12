@@ -68,13 +68,15 @@ body {
 /* ===== メッセージ ===== */
 .message-box {
     position: absolute;
-    top: 65%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 55%;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 15px;
-    border-radius: 15px;
-    text-align: center;
+
+    bottom: 16%;   /* 下からの位置 */
+    left:18%;     /* 左からの位置 */
+
+    width:29%;   /* 横幅 */
+
+    background: transparent;  /* 背景透明 */
+
+    padding: 50px;
+    text-align: left;
     line-height: 1.8;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}

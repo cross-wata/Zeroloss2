@@ -17,136 +17,76 @@ public class CalendarService {
         this.repo = repo;
     }
 
-    // DBにProgressが無ければ1件作る
-    public Progress getProgress() {
-        if (repo.count() == 0) {
+    private Progress getOrCreateProgress() {
+        return repo.findById(1L).orElseGet(() -> {
             Progress p = new Progress();
+            p.setId(1L);
             p.setStage(1);
             p.setStreakCount(0);
             p.setDeathJustShown(false);
-            p.setLastMessage("");
-            repo.save(p);
-        }
-        return repo.findAll().get(0);
+            p.setLastMessage("まだメッセージはありません。");
+            return repo.save(p);
+        });
     }
 
-    // 今日の日付
-    public int getToday() {
-        return LocalDate.now().getDayOfMonth();
-    }
+    public Map<String, Object> status() {
+        Progress p = getOrCreateProgress();
+        LocalDate today = LocalDate.now();
 
-    // 初期表示用
-    public Map<String, Object> getStatus() {
-        Progress p = getProgress();
+        boolean canPressToday = !today.equals(p.getLastPressDate());
 
         Map<String, Object> result = new HashMap<>();
-        result.put("today", getToday());
+        result.put("today", today.getDayOfMonth());
         result.put("stage", p.getStage());
         result.put("streakCount", p.getStreakCount());
-        result.put("lastMessage", p.getLastMessage());
         result.put("lastPressDate", p.getLastPressDate());
+        result.put("lastMessage", p.getLastMessage());
         result.put("deathJustShown", p.isDeathJustShown());
+        result.put("canPressToday", canPressToday);
 
         return result;
     }
 
-    // ボタン押下時の処理
-    public Map<String, Object> press(int day) {
+    public Map<String, Object> press(int day, String message) {
+        Progress p = getOrCreateProgress();
         LocalDate today = LocalDate.now();
-        int todayDay = today.getDayOfMonth();
 
         Map<String, Object> result = new HashMap<>();
-        Progress p = getProgress();
 
-        // 当日のボタンしか押せない
-        if (day != todayDay) {
+        if (day != today.getDayOfMonth()) {
             result.put("ok", false);
-            result.put("message", "今日は " + todayDay + " 日のボタンだけ押せます。");
+            result.put("message", "今日の日付ではありません。");
             result.put("stage", p.getStage());
             result.put("streakCount", p.getStreakCount());
             return result;
         }
 
-        // 初回
-        if (p.getLastPressDate() == null) {
-            p.setLastPressDate(today);
-            p.setStreakCount(1);
-            p.setStage(1);
-            p.setDeathJustShown(false);
-            p.setLastMessage(day + "日目のメッセージです！");
-            repo.save(p);
-
-            result.put("ok", true);
-            result.put("message", p.getLastMessage());
+        if (today.equals(p.getLastPressDate())) {
+            result.put("ok", false);
+            result.put("message", "今日はもう押しています。");
             result.put("stage", p.getStage());
             result.put("streakCount", p.getStreakCount());
             return result;
         }
 
-        LocalDate last = p.getLastPressDate();
-
-        // 同じ日にもう一度押した場合
-        if (today.equals(last)) {
-            result.put("ok", true);
-            result.put("message", "今日はすでに押しています。");
-            result.put("stage", p.getStage());
-            result.put("streakCount", p.getStreakCount());
-            return result;
-        }
-
-        // 連続しているか
-        boolean isConsecutive = today.equals(last.plusDays(1));
-
-        // 連続が途切れた場合 → その日は死神(stage6)
-        if (!isConsecutive) {
-            p.setLastPressDate(today);
-            p.setStage(6);
-            p.setStreakCount(0);
-            p.setDeathJustShown(true);
-            p.setLastMessage(day + "日目のメッセージです！");
-            repo.save(p);
-
-            result.put("ok", true);
-            result.put("message", "連続記録が途切れました。死神が表示されます。");
-            result.put("stage", p.getStage());
-            result.put("streakCount", p.getStreakCount());
-            return result;
-        }
-
-        // 死神表示の翌日に押した場合 → stage1で再スタート
-        if (p.isDeathJustShown()) {
-            p.setLastPressDate(today);
-            p.setDeathJustShown(false);
-            p.setStreakCount(1);
-            p.setStage(1);
-            p.setLastMessage(day + "日目のメッセージです！");
-            repo.save(p);
-
-            result.put("ok", true);
-            result.put("message", "再スタートです。卵(stage1)に戻ります。");
-            result.put("stage", p.getStage());
-            result.put("streakCount", p.getStreakCount());
-            return result;
-        }
-
-        // 通常の連続カウント
         p.setLastPressDate(today);
         p.setStreakCount(p.getStreakCount() + 1);
+        p.setLastMessage(message);
 
-        // 6日連続ごとにstageアップ（1〜5）
-        int stage = ((p.getStreakCount() - 1) / 6) + 1;
-        if (stage > 5) {
-            stage = 5;
+        int stage = p.getStage() + 1;
+        if (stage > 6) {
+            stage = 6;
         }
         p.setStage(stage);
 
-        p.setLastMessage(day + "日目のメッセージです！");
         repo.save(p);
 
         result.put("ok", true);
         result.put("message", p.getLastMessage());
         result.put("stage", p.getStage());
         result.put("streakCount", p.getStreakCount());
+        result.put("deathJustShown", p.isDeathJustShown());
+
         return result;
     }
 }

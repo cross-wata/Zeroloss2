@@ -54,7 +54,11 @@ body {
     transform: translateX(-50%);
     width: 30%;
 }
-
+/*部分	意味
+rpgFloat	アニメーション名
+0.6s	0.6秒で1回動く
+steps(2)	カクカク動き（RPG風）
+infinite	無限ループ*/
 .stage-image {
     width:40%;
     animation: rpgFloat 0.6s steps(2) infinite;

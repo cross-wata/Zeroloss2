@@ -67,7 +67,7 @@ window.addEventListener("load", async () => {
     }
     //画像表示
         document.getElementById("stageImage").src =
-            `images/stage${stage}.png`;
+            `/images/stage${stage}.png`;
 
         // カレンダーボタン生成
         createCalendar();
@@ -76,11 +76,13 @@ window.addEventListener("load", async () => {
 function createCalendar(){
 
     const calendar = document.getElementById("calendar");
+    calendar.innerHTML = "";
 
     for(let i=1;i<=31;i++){
 
         const button = document.createElement("button");
         button.textContent = i;
+        button.className = "day";
 
         // 今日以外押せない
         if(i !== today || !canPressToday){
@@ -118,7 +120,7 @@ async function pressDay(day,button){
 
         // ステージ画像更新
         document.getElementById("stageImage").src =
-            `images/stage${data.stage}.png`;
+            `/images/stage${data.stage}.png`;
 
         // 今日のボタン無効化
         button.disabled = true;

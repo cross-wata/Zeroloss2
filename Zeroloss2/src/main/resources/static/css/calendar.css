@@ -1,33 +1,86 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>カレンダー</title>
-  <link rel="stylesheet" href="../css/calendar.css">
-</head>
-<body>
+/* ===== 全体 ===== */
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #f5f5f5;
+}
 
-<div class="bg-wrapper">
+/* ===== 背景ラッパー ===== */
+.bg-wrapper {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
 
-  <!-- 背景画像 -->
-  <img src="../images/image2.png" class="bg-image" alt="背景">
+/* 背景画像 */
+.bg-image {
+    width: 100%;
+    display: block;
+}
 
-  <!-- カレンダー -->
-  <div class="calendar-container">
-    <div class="calendar-grid" id="calendar"></div>
-  </div>
+/* ===== カレンダー ===== */
+.calendar-container {
+    position: absolute;
+    top: 12%;
+    left: 6%;
+    width: 40%;
+}
 
-  <!-- ステージ画像 -->
-  <div class="stage-box">
-    <img id="stageImage" src="/images/stage1.png" class="stage-image">
-  </div>
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
 
-</div>
+.day {
+    padding: 10px 0;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.9);
+    cursor: pointer;
+    transition: 0.2s;
+}
 
-<div class="message-box">
-  <p id="message"></p>
-</div>
+.day:hover {
+    background: #ffe082;
+    transform: translateY(-2px);
+}
 
-<script src="/js/message.js"></script>
-</body>
-</html>
+/* ===== ステージ画像 ===== */
+.stage-box {
+    position: absolute;
+    bottom: 5%;
+    left: 87%;
+    transform: translateX(-50%);
+    width: 30%;
+}
+/*部分	意味
+rpgFloat	アニメーション名
+0.6s	0.6秒で1回動く
+steps(2)	カクカク動き（RPG風）
+infinite	無限ループ*/
+.stage-image {
+    width:40%;
+    animation: rpgFloat 0.6s steps(2) infinite;
+}
+
+@keyframes rpgFloat {
+    0%   { transform: translateY(0px); }
+    100% { transform: translateY(-6px); }
+}
+
+/* ===== メッセージ ===== */
+.message-box {
+    position: absolute;
+
+    bottom: 16%;   /* 下からの位置 */
+    left:18%;     /* 左からの位置 */
+
+    width:29%;   /* 横幅 */
+
+    background: transparent;  /* 背景透明 */
+
+    padding: 50px;
+    text-align: left;
+    line-height: 1.8;
+}

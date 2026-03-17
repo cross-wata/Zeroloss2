@@ -1,37 +1,20 @@
 body {
-    background-image: url("/images/image3.png");
-    background-size: cover;       /* 画面いっぱいに広げる */
-    background-position: center;  /* 中央配置 */
-    background-repeat: no-repeat; /* 繰り返さない */
 }
 
 .calendar-container {
-    width: 600px;
-    margin: 30px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
 }
 
 .day {
-    padding: 15px;
-    background-color: #e0e0e0;
-    border-radius: 5px;
     cursor: pointer;
 }
 
 .day:hover {
-    background-color: #90caf9;
 }
 
 .stage-image {
-    margin-top: 20px;
-    width: 200px;
 }

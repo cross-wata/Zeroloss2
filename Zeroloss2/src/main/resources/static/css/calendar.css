@@ -21,24 +21,35 @@ body {
 /* ===== カレンダー ===== */
 .calendar-container {
     position: absolute;
-    top: 12%;
+    top: 7%;
     left: 6%;
-    width: 40%;
+    width: 80%;
 }
 
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
+    gap: 12px;
 }
 
 .day {
-    padding: 10px 0;
-    border: none;
-    border-radius: 8px;
+ padding: 20px 0;
+     font-size: 20px;
+     background: rgba(255,255,255,0.85);
+     border: 2px solid #fff;
+     box-shadow: 2px 2px 0 #888;
+}
+.day:not(:disabled):hover {
+    background: #ffe082;
+    transform: translateY(-2px);
+}
+
+.day:disabled {
+    cursor: default;
     background: rgba(255,255,255,0.9);
-    cursor: pointer;
-    transition: 0.2s;
+    color: gray;
+    transform: none;
+    pointer-events: none;
 }
 
 .day:hover {
@@ -64,23 +75,29 @@ infinite	無限ループ*/
     animation: rpgFloat 0.6s steps(2) infinite;
 }
 
-@keyframes rpgFloat {
-    0%   { transform: translateY(0px); }
-    100% { transform: translateY(-6px); }
-}
-
 /* ===== メッセージ ===== */
 .message-box {
     position: absolute;
 
-    bottom: 16%;   /* 下からの位置 */
-    left:18%;     /* 左からの位置 */
+    bottom: -3.5%;   /* 下からの位置 */
+    left:14%;     /* 左からの位置 */
 
     width:29%;   /* 横幅 */
+
+    font-family: 'Press Start 2P', cursive;
+    font-size: 30px;
 
     background: transparent;  /* 背景透明 */
 
     padding: 50px;
     text-align: left;
     line-height: 1.8;
+
+    width:40%;
+        animation: rpgFloat 1.2s steps(2) infinite;
+
 }
+    @keyframes rpgFloat {
+        0%   { transform: translateY(0px); }
+        100% { transform: translateY(-6px); }
+    }

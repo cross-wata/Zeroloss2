@@ -79,7 +79,7 @@ infinite	無限ループ*/
 .message-box {
     position: absolute;
 
-    bottom: -3.5%;   /* 下からの位置 */
+    bottom: -5%;   /* 下からの位置 */
     left:14%;     /* 左からの位置 */
 
     width:29%;   /* 横幅 */

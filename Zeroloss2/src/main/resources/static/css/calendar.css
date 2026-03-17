@@ -1,20 +1,33 @@
-body {
-}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>カレンダー</title>
+  <link rel="stylesheet" href="../css/calendar.css">
+</head>
+<body>
 
-.calendar-container {
-}
+<div class="bg-wrapper">
 
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-}
+  <!-- 背景画像 -->
+  <img src="../images/image2.png" class="bg-image" alt="背景">
 
-.day {
-    cursor: pointer;
-}
+  <!-- カレンダー -->
+  <div class="calendar-container">
+    <div class="calendar-grid" id="calendar"></div>
+  </div>
 
-.day:hover {
-}
+  <!-- ステージ画像 -->
+  <div class="stage-box">
+    <img id="stageImage" src="/images/stage1.png" class="stage-image">
+  </div>
 
-.stage-image {
-}
+</div>
+
+<div class="message-box">
+  <p id="message"></p>
+</div>
+
+<script src="/js/message.js"></script>
+</body>
+</html>

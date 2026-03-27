@@ -78,7 +78,34 @@ function createCalendar(){
     const calendar = document.getElementById("calendar");
     calendar.innerHTML = "";
 
-    for(let i=1;i<=31;i++){
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+
+    // 月の日数取得
+    const lastDate = new Date(year, month + 1, 0).getDate();
+
+    // 1日の曜日取得
+    const firstDay = new Date(year, month, 1).getDay();
+
+    //　曜日表示
+    const weekDays = ["日", "月", "火", "水", "木", "金", "土"];
+
+    for(let i = 0; i < 7; i++){
+    const dayLabel = document.createElement("div");
+    dayLabel.textContent = weekDays[i];
+    dayLabel.className = "weekday";
+
+    calendar.appendChild(dayLabel);
+}
+    // 空白（曜日調整）ボタンを曜日ごとに並べる
+    for(let i = 0; i < firstDay; i++){
+        const empty = document.createElement("div");
+        calendar.appendChild(empty);
+    }
+
+    // 日付ボタン生成
+    for(let i = 1; i <= lastDate; i++){
 
         const button = document.createElement("button");
         button.textContent = i;
@@ -88,8 +115,6 @@ function createCalendar(){
         if(i !== today || !canPressToday){
             button.disabled = true;
         }
-
-        // ボタン押した時
         button.addEventListener("click", () => pressDay(i,button));
 
         calendar.appendChild(button);

@@ -24,6 +24,7 @@ body {
 /* ===== カレンダー ===== */
 .calendar-container {
     position: absolute;
+
     top: 5%;
     left: 15%;
     width: 70%;

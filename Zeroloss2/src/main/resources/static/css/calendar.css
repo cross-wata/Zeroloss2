@@ -24,10 +24,10 @@ body {
 /* ===== カレンダー ===== */
 .calendar-container {
     position: absolute;
-    top: 10%;
+    top: 6%;
     left: 15%;
     width: 70%;
-    height: 20%;
+    height: 22%;
 }
 
 .calendar-grid {

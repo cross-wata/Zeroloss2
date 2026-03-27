@@ -40,7 +40,7 @@ function getRandomElement(arr) {
 }
 
 function createMessage() {
-    return getRandomElement(phrases1) + "、" +
+    return getRandomElement(phrases1) + " " +
            getRandomElement(phrases2) + " " +
            getRandomElement(phrases3);
 }

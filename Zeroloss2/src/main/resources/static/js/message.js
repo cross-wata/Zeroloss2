@@ -88,6 +88,11 @@ function createCalendar(){
     // 1日の曜日取得
     const firstDay = new Date(year, month, 1).getDay();
 
+    //　月表示
+    const monthElement = document.getElementById("month");
+    const displayMonth = month + 1;
+    monthElement.textContent = displayMonth + "月";
+
     //　曜日表示
     const weekDays = ["日", "月", "火", "水", "木", "金", "土"];
 

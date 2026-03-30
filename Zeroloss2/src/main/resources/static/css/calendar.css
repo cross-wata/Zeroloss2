@@ -43,10 +43,8 @@ font-size: 40px;
 text-align: left;
 margin-left: -65px;
 top: 50%;
+    animation: rpgFloat 1.2s steps(2) infinite;
 }
-
-
-
 
 .week-row {
     display: grid;

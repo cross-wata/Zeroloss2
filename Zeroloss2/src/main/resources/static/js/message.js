@@ -99,9 +99,10 @@ function createCalendar(){
     for(let i = 0; i < 7; i++){
     const dayLabel = document.createElement("div");
     dayLabel.textContent = weekDays[i];
-    dayLabel.className = "weekday";
+    dayLabel.className = "week-day";
 
-    calendar.appendChild(dayLabel);
+        const week = document.getElementById("week");
+        week.appendChild(dayLabel);
 }
     // 空白（曜日調整）ボタンを曜日ごとに並べる
     for(let i = 0; i < firstDay; i++){

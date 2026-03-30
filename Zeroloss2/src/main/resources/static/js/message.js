@@ -10,6 +10,7 @@ const phrases1 = [
     "にじのきらめきが,",
     "きぼうのひかりが,"
 ];
+
 const phrases2 = [
     "やさしく,",
     "しずかに,",
@@ -22,6 +23,7 @@ const phrases2 = [
     "ぬくもりをたたえて,",
     "かがやきをまとい,"
 ];
+
 const phrases3 = [
     "あなたをみまもっています。",
     "みちびいてくれるでしょう。",
@@ -41,37 +43,58 @@ function getRandomElement(arr) {
 
 function createMessage() {
     return getRandomElement(phrases1) + " " +
-           getRandomElement(phrases2) + " " +
-           getRandomElement(phrases3);
+        getRandomElement(phrases2) + " " +
+        getRandomElement(phrases3);
 }
 
-//API取得
+// APIデータ
 let today;
 let stage;
 let lastMessage;
 let canPressToday;
 
 window.addEventListener("load", async () => {
-//API呼び出し
-    const response = await fetch("/api/status");
-    const data = await response.json();
+    try {
+        const response = await fetch("/api/status");
+        const data = await response.json();
 
-    today = data.today;
-    stage = data.stage;
-    lastMessage = data.lastMessage;
-    canPressToday = data.canPressToday;
+        today = Number(data.today); // ★ 型対策
+        stage = data.stage;
+        lastMessage = data.lastMessage;
+        canPressToday = data.canPressToday;
 
-    // 前回メッセージ表示
-    if(lastMessage){
-        document.getElementById("message").textContent = lastMessage;
-    }
-    //画像表示
-        document.getElementById("stageImage").src =
-            `/images/stage${stage}.png`;
+        if(lastMessage){
+            document.getElementById("message").textContent = lastMessage;
+        }
 
-        // カレンダーボタン生成
+// 背景画像切り替え
+        const bgImage = document.getElementById("bgImage");
+
+        const now = new Date();
+        const month = now.getMonth() + 1; // 1〜12にする
+
+        let bgSrc = "../images/image2.png";
+
+        if(month >= 3 && month <= 5){
+            bgSrc = "../images/image2.png";
+        }else if(month >= 6 && month <= 8){
+            bgSrc = "../images/image3.png";
+        }else if(month >= 9 && month <= 11){
+            bgSrc = "../images/image4.png";
+        }else{
+            bgSrc = "../images/image5.png";
+        }
+
+        if(bgImage){
+            bgImage.src = bgSrc;
+        }
+
         createCalendar();
-    });
+
+    } catch (e) {
+        console.error("APIエラー:", e);
+    }
+});
 
 function createCalendar(){
 
@@ -82,52 +105,55 @@ function createCalendar(){
     const year = now.getFullYear();
     const month = now.getMonth();
 
-    // 月の日数取得
     const lastDate = new Date(year, month + 1, 0).getDate();
-
-    // 1日の曜日取得
     const firstDay = new Date(year, month, 1).getDay();
 
-    //　月表示
+    // 月表示
     const monthElement = document.getElementById("month");
-    const displayMonth = month + 1;
-    monthElement.textContent = displayMonth + "月";
+    if(monthElement){
+        monthElement.textContent = (month + 1) + "月";
+    }
 
-    //　曜日表示
+    // 曜日表示
     const weekDays = ["日", "月", "火", "水", "木", "金", "土"];
 
-    for(let i = 0; i < 7; i++){
-    const dayLabel = document.createElement("div");
-    dayLabel.textContent = weekDays[i];
-    dayLabel.className = "week-day";
+    const week = document.getElementById("week");
+    if(!week) return;
+    week.innerHTML = ""; // ★ リセット
 
-        const week = document.getElementById("week");
+    for(let i = 0; i < 7; i++){
+        const dayLabel = document.createElement("div");
+        dayLabel.textContent = weekDays[i];
+        dayLabel.className = "week-day";
         week.appendChild(dayLabel);
-}
-    // 空白（曜日調整）ボタンを曜日ごとに並べる
+    }
+
+    // 空白
     for(let i = 0; i < firstDay; i++){
         const empty = document.createElement("div");
         calendar.appendChild(empty);
     }
 
-    // 日付ボタン生成
+    // 日付ボタン
     for(let i = 1; i <= lastDate; i++){
 
         const button = document.createElement("button");
         button.textContent = i;
         button.className = "day";
 
-        // 今日以外押せない
         if(i !== today || !canPressToday){
             button.disabled = true;
         }
-        button.addEventListener("click", () => pressDay(i,button));
+
+        button.addEventListener("click", () => pressDay(i, button));
 
         calendar.appendChild(button);
     }
 }
 
-async function pressDay(day,button){
+async function pressDay(day, button){
+
+    button.disabled = true; // 先に無効化
 
     const message = createMessage();
 
@@ -145,15 +171,9 @@ async function pressDay(day,button){
     const data = await response.json();
 
     if(data.ok){
-
-        // メッセージ更新
         document.getElementById("message").textContent = data.message;
 
-        // ステージ画像更新
         document.getElementById("stageImage").src =
             `/images/stage${data.stage}.png`;
-
-        // 今日のボタン無効化
-        button.disabled = true;
     }
 }

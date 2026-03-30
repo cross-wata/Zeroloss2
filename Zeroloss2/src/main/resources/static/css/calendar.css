@@ -40,10 +40,14 @@ body {
 .month-waku {
 position: relative;
 font-size: 40px;
+color: black;
 text-align: left;
-margin-left: -65px;
+margin-left: -68px;
 top: 50%;
-    animation: rpgFloat 1.2s steps(2) infinite;
+    animation: spin 4s linear infinite;
+    width: fit-content;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 6px;
 }
 
 .week-row {
@@ -143,4 +147,9 @@ infinite	無限ループ*/
 @keyframes rpgFloat {
     0%   { transform: translateY(0px); }
     100% { transform: translateY(-6px); }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
 }

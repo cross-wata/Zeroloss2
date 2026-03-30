@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -15,11 +14,14 @@
 
   <!-- カレンダー -->
   <div class="calendar-container">
-    <!--月-->
-    <div class="month-waku" id="month"></div>
-    <!--　曜日　-->
+
+    <!-- 月表示（追加） -->
+    <div id="month" class="month"></div>
+
+    <!-- 曜日 -->
     <div class="week-row" id="week"></div>
 
+    <!-- 日付 -->
     <div class="calendar-grid" id="calendar"></div>
   </div>
 
@@ -30,11 +32,12 @@
 
 </div>
 
+<!-- メッセージ表示 -->
 <div class="message-box">
   <p id="message"></p>
 </div>
 
+<!-- JS読み込み -->
 <script src="/js/message.js"></script>
 </body>
 </html>
-

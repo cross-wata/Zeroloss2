@@ -25,7 +25,7 @@ body {
 .calendar-container {
     position: absolute;
 
-    top: 5%;
+    top: -2%;
     left: 15%;
     width: 70%;
     height: 22%;
@@ -38,24 +38,12 @@ body {
 }
 
 .month-waku {
-    display: grid;
-    gap: 6px;
-}
-
-.month-dzn {
-    text-align: center;
-    font-size: 1.2vw;
-    font-weight: bold;
-    color: white;
-
-    background: rgba(0,0,0,0.5);
-    border-radius: 6px;
-    padding: 5px 0;
-}
-
-.month {
-    justify-self: start;
-    align-self: start;
+position: relative;
+font-size: 40px;
+text-align: left;
+margin-left: -65px;
+top: 50%;
+    animation: rpgFloat 1.2s steps(2) infinite;
 }
 
 .week-row {

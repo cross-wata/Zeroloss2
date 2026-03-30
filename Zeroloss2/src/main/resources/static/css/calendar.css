@@ -25,10 +25,10 @@ body {
 .calendar-container {
     position: absolute;
 
-    top: -2%;
+    top: 5%;
     left: 15%;
     width: 70%;
-    height: 22%;
+    height: 20%;
 }
 
 .calendar-grid {
@@ -37,17 +37,22 @@ body {
     gap: 6px;
 }
 
-.month-waku {
-position: relative;
-font-size: 40px;
-color: black;
-text-align: left;
-margin-left: -68px;
-top: 50%;
-    animation: spin 4s linear infinite;
+.month {
+    position: absolute;
+    top: 20px;
+    left: -70px;
     width: fit-content;
+    display: inline-block;
+    font-size: 30px;
+    color: black;
+    text-align: left;
+
+    padding: 5px 10px;
+
     background: rgba(255, 255, 255, 0.8);
     border-radius: 6px;
+
+    animation: spin 4s linear infinite;
 }
 
 .week-row {

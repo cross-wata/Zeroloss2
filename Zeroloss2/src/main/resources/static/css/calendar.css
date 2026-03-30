@@ -37,6 +37,27 @@ body {
     gap: 6px;
 }
 
+.month-waku {
+    display: grid;
+    gap: 6px;
+}
+
+.month-dzn {
+    text-align: center;
+    font-size: 1.2vw;
+    font-weight: bold;
+    color: white;
+
+    background: rgba(0,0,0,0.5);
+    border-radius: 6px;
+    padding: 5px 0;
+}
+
+.month {
+    justify-self: start;
+    align-self: start;
+}
+
 .week-row {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -71,10 +92,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.day:not(:disabled):hover {
-    background: #ffe082;
-    transform: translateY(-2px);
 }
 
 .day:disabled {

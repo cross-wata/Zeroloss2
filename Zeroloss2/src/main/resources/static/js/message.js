@@ -67,8 +67,27 @@ window.addEventListener("load", async () => {
             document.getElementById("message").textContent = lastMessage;
         }
 
-        document.getElementById("stageImage").src =
-            `/images/stage${stage}.png`;
+// 背景画像切り替え
+        const bgImage = document.getElementById("bgImage");
+
+        const now = new Date();
+        const month = now.getMonth() + 1; // 1〜12にする
+
+        let bgSrc = "../images/image2.png";
+
+        if(month >= 3 && month <= 5){
+            bgSrc = "../images/image2.png";
+        }else if(month >= 6 && month <= 8){
+            bgSrc = "../images/image3.png";
+        }else if(month >= 9 && month <= 11){
+            bgSrc = "../images/image4.png";
+        }else{
+            bgSrc = "../images/image5.png";
+        }
+
+        if(bgImage){
+            bgImage.src = bgSrc;
+        }
 
         createCalendar();
 

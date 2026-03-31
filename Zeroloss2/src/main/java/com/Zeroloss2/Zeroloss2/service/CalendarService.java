@@ -45,7 +45,7 @@ public class CalendarService {
     }
 
     private void setDeathStage(Progress p) {
-        p.setStage(7);
+        p.setStage(14);
         p.setDeathJustShown(true);
         p.setLastMessage("れんぞくが とぎれてしまいました……。");
     }
@@ -54,32 +54,43 @@ public class CalendarService {
         p.setLastPressDate(today);
         p.setStreakCount(1);
         p.setLastMessage(message);
-        p.setStage(calculateStage(1)); // 1日目なので stage2
+        p.setStage(calculateStage(0)); // ← stage1になる
         p.setDeathJustShown(false);
     }
 
     /**
      * stage計算
-     * 0回   -> stage1
-     * 1～6回 -> stage2
-     * 7～12回 -> stage3
-     * 13～18回 -> stage4
-     * 19～24回 -> stage5
-     * 25～30回 -> stage6
-     * 31回以上 -> stage7
+     *
+     * 0日目  -> stage1
+     * 1日目  -> stage2
+     * 3日目  -> stage3
+     * 5日目  -> stage4
+     * 7日目  -> stage5
+     * 9日目  -> stage6
+     * 11日目 -> stage7
+     * 13日目 -> stage8
+     * 15日目 -> stage9
+     * 17日目 -> stage10
+     * 19日目 -> stage11
+     * 22日目 -> stage12
+     * 27日目 -> stage13
+     *
+     * ※ stage14 は死神専用
      */
     private int calculateStage(int streakCount) {
         if (streakCount <= 0) {
             return 1;
         }
 
-        int stage = 2 + (streakCount - 1) / 6;
+        int[] thresholds = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 22, 27};
 
-        if (stage > 7) {
-            stage = 7;
+        for (int i = thresholds.length - 1; i >= 0; i--) {
+            if (streakCount >= thresholds[i]) {
+                return i + 2;
+            }
         }
 
-        return stage;
+        return 1;
     }
 
     /**

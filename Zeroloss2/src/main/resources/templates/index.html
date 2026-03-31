@@ -6,11 +6,10 @@
   <link rel="stylesheet" href="../css/calendar.css">
 </head>
 <body>
-
 <div class="bg-wrapper">
-
+  <audio src="/BGM/tekuteku.mp3" autoplay loop></audio>
   <!-- 背景画像 -->
-  <img id="bgImage" src="../images/image2.png" class="bg-image" alt="背景">
+  <img id="bgImage" src="/images/image2.png" class="bg-image" alt="背景">
 
   <!-- カレンダー -->
   <div class="calendar-container">
@@ -36,6 +35,14 @@
 <div class="message-box">
   <p id="message"></p>
 </div>
+
+<script>
+  document.addEventListener("click", () => {
+    const bgm = document.getElementById("bgm");
+    bgm.volume = 0.2;
+    bgm.play();
+  }, { once: true });
+</script>
 
 <!-- JS読み込み -->
 <script src="/js/message.js"></script>

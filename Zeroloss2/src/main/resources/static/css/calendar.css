@@ -144,6 +144,26 @@ infinite	無限ループ*/
 
 }
 
+.free-img {
+    position: absolute;
+
+    top: 100px;   /* 上からの位置 */
+    left: 200px;  /* 左からの位置 */
+
+    width: 200px; /* サイズ自由 */
+    height: auto;
+}
+
+.free2-img {
+    position: absolute;
+
+    top: 100px;   /* 上からの位置 */
+    left: 200px;  /* 左からの位置 */
+
+    width: 200px; /* サイズ自由 */
+    height: auto;
+}
+
 @font-face {
     font-family: 'yurumoji';
     src: url('/css/font/yurumoji.ttf') format('truetype');

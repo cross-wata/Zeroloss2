@@ -181,7 +181,7 @@ async function pressDay(day, button){
             `/images/stage${data.stage}.png`;
     }
 }
-
+//BGM
 document.addEventListener("click", () => {
     const bgm = document.getElementById("bgm");
     bgm.volume = 0.2;

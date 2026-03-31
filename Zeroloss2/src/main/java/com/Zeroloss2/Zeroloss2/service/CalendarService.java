@@ -30,6 +30,34 @@ public class CalendarService {
         });
     }
 
+    private boolean isStreakBroken(LocalDate lastDate, LocalDate today) {
+        if (lastDate == null) {
+            return false;
+        }
+
+        // 月が変わっていたら月初リセットを優先するのでここでは除外
+        if (isNewMonth(lastDate, today)) {
+            return false;
+        }
+
+        // 昨日以外なら連続切れ
+        return !lastDate.equals(today.minusDays(1));
+    }
+
+    private void setDeathStage(Progress p) {
+        p.setStage(7);
+        p.setDeathJustShown(true);
+        p.setLastMessage("れんぞくが とぎれてしまいました……。");
+    }
+
+    private void restartFromBeginning(Progress p, LocalDate today, String message) {
+        p.setLastPressDate(today);
+        p.setStreakCount(1);
+        p.setLastMessage(message);
+        p.setStage(calculateStage(1)); // 1日目なので stage2
+        p.setDeathJustShown(false);
+    }
+
     /**
      * stage計算
      * 0回   -> stage1
@@ -110,6 +138,7 @@ public class CalendarService {
         // 月が変わっていたらリセット
         if (isNewMonth(p.getLastPressDate(), today)) {
             resetForNewMonth(p);
+            repo.save(p);
         }
 
         // 今日の日付以外は押せない
@@ -118,6 +147,7 @@ public class CalendarService {
             result.put("message", "今日の日付ではありません。");
             result.put("stage", p.getStage());
             result.put("streakCount", p.getStreakCount());
+            result.put("deathJustShown", p.isDeathJustShown());
             return result;
         }
 
@@ -127,14 +157,45 @@ public class CalendarService {
             result.put("message", "今日はもう押しています。");
             result.put("stage", p.getStage());
             result.put("streakCount", p.getStreakCount());
+            result.put("deathJustShown", p.isDeathJustShown());
             return result;
         }
 
-        // 押下成功時の更新
+        // 前回死神を表示した直後なら、今回は最初から再開
+        if (p.isDeathJustShown()) {
+            restartFromBeginning(p, today, message);
+            repo.save(p);
+
+            result.put("ok", true);
+            result.put("message", p.getLastMessage());
+            result.put("stage", p.getStage());
+            result.put("streakCount", p.getStreakCount());
+            result.put("deathJustShown", p.isDeathJustShown());
+            return result;
+        }
+
+        // 連続が途切れていたら、今回は死神表示だけする
+        if (isStreakBroken(p.getLastPressDate(), today)) {
+            p.setLastPressDate(today);
+            p.setStreakCount(0);
+            setDeathStage(p);
+
+            repo.save(p);
+
+            result.put("ok", true);
+            result.put("message", p.getLastMessage());
+            result.put("stage", p.getStage());
+            result.put("streakCount", p.getStreakCount());
+            result.put("deathJustShown", p.isDeathJustShown());
+            return result;
+        }
+
+        // 通常の連続押下
         p.setLastPressDate(today);
         p.setStreakCount(p.getStreakCount() + 1);
         p.setLastMessage(message);
         p.setStage(calculateStage(p.getStreakCount()));
+        p.setDeathJustShown(false);
 
         repo.save(p);
 

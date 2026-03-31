@@ -67,6 +67,10 @@ window.addEventListener("load", async () => {
             document.getElementById("message").textContent = lastMessage;
         }
 
+ // ★ 「画面を開いた瞬間」 の更新　suzume
+        document.getElementById("stageImage").src =
+            `/images/stage${data.stage}.png`;
+
 // 背景画像切り替え
         const bgImage = document.getElementById("bgImage");
 

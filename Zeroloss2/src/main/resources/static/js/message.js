@@ -181,3 +181,9 @@ async function pressDay(day, button){
             `/images/stage${data.stage}.png`;
     }
 }
+
+document.addEventListener("click", () => {
+    const bgm = document.getElementById("bgm");
+    bgm.volume = 0.2;
+    bgm.play();
+}, { once: true });

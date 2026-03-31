@@ -24,8 +24,7 @@ body {
 /* ===== カレンダー ===== */
 .calendar-container {
     position: absolute;
-
-    top: 5%;
+    top: 10%;
     left: 15%;
     width: 70%;
     height: 20%;
@@ -37,49 +36,6 @@ body {
     gap: 6px;
 }
 
-.month {
-    position: absolute;
-    top: 20px;
-    left: -70px;
-    width: fit-content;
-    display: inline-block;
-    font-size: 30px;
-    color: black;
-    text-align: left;
-
-    padding: 5px 10px;
-
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 6px;
-
-    animation: spin 4s linear infinite;
-}
-
-.week-row {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
-}
-
-.week-day {
-    text-align: center;
-    font-size: 1.2vw;
-    font-weight: bold;
-    color: white;
-
-    background: rgba(0,0,0,0.5);
-    border-radius: 6px;
-    padding: 5px 0;
-}
-
-.week-day:nth-child(7) {
-    color: blue;
-}
-
-.week-day:nth-child(1) {
-    color: red;
-}
-
 .day {
     font-size: 20px;
     background: rgba(255,255,255,0.85);
@@ -89,6 +45,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.day:not(:disabled):hover {
+    background: #ffe082;
+    transform: translateY(-2px);
 }
 
 .day:disabled {
@@ -152,9 +112,4 @@ infinite	無限ループ*/
 @keyframes rpgFloat {
     0%   { transform: translateY(0px); }
     100% { transform: translateY(-6px); }
-}
-
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
 }

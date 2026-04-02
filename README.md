@@ -77,7 +77,7 @@ SpringBoot / API / DB
 B担当（フロントロジック） cross-wata
 JavaScript / カレンダー処理
 
-C担当（UIデザイン）zero
+C担当（UIデザイン）kota20031118-stack
 HTML / CSS / 画面デザイン
 
 ## 工夫した点

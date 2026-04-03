@@ -94,7 +94,7 @@ body {
 .day:disabled {
     cursor: default;
     background: rgba(255,255,255,0.9);
-    color: gray;
+    color:gray;
     transform: none;
     pointer-events: none;
 }
@@ -126,8 +126,8 @@ infinite	無限ループ*/
 .message-box {
     position: absolute;
 
-    bottom: 5%;   /* 下からの位置 */
-    left:17%;     /* 左からの位置 */
+    bottom:3.5%;   /* 下からの位置 */
+    left:15%;     /* 左からの位置 */
 
     width:29%;   /* 横幅 */
 

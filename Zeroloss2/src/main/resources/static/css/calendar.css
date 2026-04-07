@@ -155,21 +155,23 @@ infinite	無限ループ*/
 .free-img {
     position: absolute;
 
-    top: 100px;   /* 上からの位置 */
-    left: 200px;  /* 左からの位置 */
+    top: 290px;   /* 上からの位置 */
+    left: 5px;  /* 左からの位置 */
 
-    width: 200px; /* サイズ自由 */
+    width: 50px;
     height: auto;
 }
 
 .free2-img {
     position: absolute;
 
-    top: 100px;   /* 上からの位置 */
-    left: 200px;  /* 左からの位置 */
+    top: 10vh;
+    left: 30.8vw;
 
-    width: 200px; /* サイズ自由 */
+    width: 35px;
     height: auto;
+
+    animation: rpgFloat 2.5s steps(4) infinite;
 }
 
 @font-face {
@@ -186,3 +188,4 @@ infinite	無限ループ*/
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }
 }
+

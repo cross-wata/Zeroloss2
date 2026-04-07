@@ -53,8 +53,13 @@ public class CalendarService {
     private void restartFromBeginning(Progress p, LocalDate today, String message) {
         p.setLastPressDate(today);
         p.setStreakCount(1);
-        p.setLastMessage(message);
-        p.setStage(calculateStage(0)); // ← stage1になる
+
+        int streak = p.getStreakCount();
+        String messageText = "【 " + streak + "日目 】 " + message;
+
+        p.setLastMessage(messageText);
+
+        p.setStage(calculateStage(0));
         p.setDeathJustShown(false);
     }
 
@@ -204,8 +209,13 @@ public class CalendarService {
         // 通常の連続押下
         p.setLastPressDate(today);
         p.setStreakCount(p.getStreakCount() + 1);
-        p.setLastMessage(message);
-        p.setStage(calculateStage(p.getStreakCount()));
+
+        // サーバーでメッセージ作る
+        int streak = p.getStreakCount();
+        String messageText = "【 " + streak + "日目 】 " + message;
+        p.setLastMessage(messageText);
+
+        p.setStage(calculateStage(streak));
         p.setDeathJustShown(false);
 
         repo.save(p);

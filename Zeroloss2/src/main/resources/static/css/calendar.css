@@ -210,13 +210,25 @@ infinite	無限ループ*/
 .free5-img {
     position: absolute;
 
-    top: 67%;
-    right: 37%;
+    top: 69%;
+    right: 40%;
 
     width: 80px;
     height: auto;
 
-    animation: swayX 0.5s ease-in-out infinite;
+    animation: jumpSide 1s infinite;
+}
+
+.free6-img {
+    position: absolute;
+
+    top: 70%;
+    left: 1.5%;
+
+    width: 75px;
+    height: auto;
+
+    animation: bounce 1s infinite;
 }
 
 @font-face {
@@ -242,3 +254,18 @@ infinite	無限ループ*/
     100% { transform: translateX(0px); }
 }
 
+@keyframes bounce {
+    0%   { transform: translateY(0); }
+    30%  { transform: translateY(-15px); }
+    50%  { transform: translateY(0); }
+    70%  { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes jumpSide {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(10px, -10px); }
+    50%  { transform: translate(25px, 0); }
+    75%  { transform: translate(10px, -10px); }
+    100% { transform: translate(0, 0); }
+}

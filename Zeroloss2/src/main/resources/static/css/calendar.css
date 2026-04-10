@@ -32,7 +32,7 @@ body {
 }
 
 .calendar-container {
-    height:70vh;
+    height:65vh;
     overflow-y: auto;
 }
 

@@ -1,3 +1,11 @@
+//月表示と背景変化テスト用コード1
+//1から3のコードをnew dateの代わりに起動するとテストできます
+//function getBaseDate() {
+    // テスト時だけここを書き換える
+   // return new Date("2028-02-10");
+//}
+
+
 function createPhrases1(streak){
         return "【 <span class='streak-num'>" + streak + "</span>日目 】";
     }
@@ -83,8 +91,13 @@ function createPhrases1(streak){
 // 背景画像切り替え
             const bgImage = document.getElementById("bgImage");
 
+            //月表示と背景変化テストする際は下記３行非表示にする
             const now = new Date();
             const month = now.getMonth() + 1; // 1〜12にする
+
+           // 月表示と背景変化テスト用コード2
+            //const now = getBaseDate();
+            //const month = now.getMonth() + 1;
 
             let bgSrc = "../images/image2.png";
 
@@ -114,9 +127,16 @@ function createPhrases1(streak){
         const calendar = document.getElementById("calendar");
         calendar.innerHTML = "";
 
+        //月表示と背景変化テストする際は下記３行非表示にする
         const now = new Date();
         const year = now.getFullYear();
         const month = now.getMonth();
+
+        //月表示と背景変化テスト用コード3
+        //const now = getBaseDate();
+        //const year = now.getFullYear();
+        //const month = now.getMonth();
+
 
         const lastDate = new Date(year, month + 1, 0).getDate();
         const firstDay = new Date(year, month, 1).getDay();

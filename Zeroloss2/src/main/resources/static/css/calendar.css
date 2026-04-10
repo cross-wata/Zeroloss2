@@ -134,12 +134,12 @@ infinite	無限ループ*/
 .message-box {
     position: absolute;
 
-    bottom:3.5%;   /* 下からの位置 */
-    left:15%;     /* 左からの位置 */
+    bottom:1.4%;   /* 下からの位置 */
+    left:7%;     /* 左からの位置 */
 
-    width:29%;   /* 横幅 */
+    width:35%;   /* 横幅 */
 
-    font-size: 2.2vw;
+    font-size: 2vw;
 
     background: transparent;  /* 背景透明 */
 
@@ -152,6 +152,13 @@ infinite	無限ループ*/
 
 }
 
+.streak-num {
+    color: gold;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+
 .free-img {
     position: absolute;
 
@@ -160,6 +167,8 @@ infinite	無限ループ*/
 
     width: 50px;
     height: auto;
+
+    animation: swayX 0.01s ease-in-out infinite;
 }
 
 .free2-img {

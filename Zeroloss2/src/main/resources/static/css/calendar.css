@@ -219,6 +219,18 @@ infinite	無限ループ*/
     animation: swayX 0.5s ease-in-out infinite;
 }
 
+.free6-img {
+    position: absolute;
+
+    top: 70%;
+    left: 1.5%;
+
+    width: 75px;
+    height: auto;
+
+    animation: bounce 1s infinite;
+}
+
 @font-face {
     font-family: 'yurumoji';
     src: url('/css/font/yurumoji.ttf') format('truetype');
@@ -242,3 +254,10 @@ infinite	無限ループ*/
     100% { transform: translateX(0px); }
 }
 
+@keyframes bounce {
+    0%   { transform: translateY(0); }
+    30%  { transform: translateY(-20px); }
+    50%  { transform: translateY(0); }
+    70%  { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}

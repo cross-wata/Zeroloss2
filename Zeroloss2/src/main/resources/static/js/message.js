@@ -1,4 +1,12 @@
-const phrases1 = [
+function createStreakText(streak) {
+    return "【 " + streak + "日れんぞくログイン達成 】";
+}
+
+function createPhrases1(streak){
+    return "【 " + streak + "日目 】";
+}
+
+const phrases2 = [
     "ほしぼしが,",
     "つきのひかりが,",
     "もりのかぜが,",
@@ -11,7 +19,7 @@ const phrases1 = [
     "きぼうのひかりが,"
 ];
 
-const phrases2 = [
+const phrases3 = [
     "やさしく,",
     "しずかに,",
     "しんぴてきに,",
@@ -24,7 +32,7 @@ const phrases2 = [
     "かがやきをまとい,"
 ];
 
-const phrases3 = [
+const phrases4 = [
     "あなたをみまもっています。",
     "みちびいてくれるでしょう。",
     "あたらしいいちにちがはじまります。",
@@ -41,10 +49,11 @@ function getRandomElement(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function createMessage() {
-    return getRandomElement(phrases1) + " " +
+function createMessage(streak) {
+    return createPhrases1(streak) + " " +   // ← +1削除
         getRandomElement(phrases2) + " " +
-        getRandomElement(phrases3);
+        getRandomElement(phrases3) + " " +
+        getRandomElement(phrases4);
 }
 
 // APIデータ
@@ -52,24 +61,28 @@ let today;
 let stage;
 let lastMessage;
 let canPressToday;
+let streakCount;
 
 window.addEventListener("load", async () => {
     try {
         const response = await fetch("/api/status");
         const data = await response.json();
+        console.log(data);
 
         today = Number(data.today); // ★ 型対策
         stage = data.stage;
         lastMessage = data.lastMessage;
         canPressToday = data.canPressToday;
+        streakCount = data.streakCount;
 
         if(lastMessage){
             document.getElementById("message").textContent = lastMessage;
         }
 
- // ★ 「画面を開いた瞬間」 の更新　suzume
+        // ★ 「画面を開いた瞬間」 の更新　suzume
         document.getElementById("stageImage").src =
             `/images/stage${data.stage}.png`;
+            streakCount = data.streakCount;
 
 // 背景画像切り替え
         const bgImage = document.getElementById("bgImage");
@@ -159,7 +172,10 @@ async function pressDay(day, button){
 
     button.disabled = true; // 先に無効化
 
-    const message = createMessage();
+    const message =
+        getRandomElement(phrases2) + " " +
+        getRandomElement(phrases3) + " " +
+        getRandomElement(phrases4);
 
     const response = await fetch("/api/press",{
         method:"POST",
